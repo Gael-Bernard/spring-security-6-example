@@ -42,16 +42,38 @@ In case you don't wish to download and run this project, I've done it on my Tomc
 ![/home after successful login](img/step5.png)
 6. User updates the ``/home`` page. Spring Security checks the user credentials again even though the user doesn't have to explicitly provide them again.
 
-
 ### Log
 
 Note: In this log, most lines come from ``System.out.println`` calls in the code from this repository. In contrast, comments using the ``/* comment */`` syntax were not in the original log.
 
 ```log
-[...]
 /* Step 1: Server finishes starting */
-01-May-2023 18:57:25.032 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
-01-May-2023 18:57:25.053 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in [6720] milliseconds
+[...]
+SecurityWebApplicationInitializer - SecurityWebApplicationInitializer
+May 01, 2023 7:10:54 PM org.apache.catalina.core.ApplicationContext log
+INFO: 2 Spring WebApplicationInitializers detected on classpath
+MainWebAppInitializer - onStartup
+May 01, 2023 7:10:55 PM org.apache.catalina.core.ApplicationContext log
+INFO: Initializing Spring root WebApplicationContext
+May 01, 2023 7:10:55 PM org.springframework.web.context.ContextLoader initWebApplicationContext
+INFO: Root WebApplicationContext: initialization started
+WebConfig - addResourceHandlers
+WebConfig - passwordEncoder(WebSecurity web)
+WebConfig - userDetailsService
+WebConfig - configure(WebSecurity web)
+WebConfig - filterChain
+May 01, 2023 7:10:57 PM org.springframework.security.web.DefaultSecurityFilterChain <init>
+INFO: Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6bfd1ed7, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@292c5abd, org.springframework.security.web.context.SecurityContextHolderFilter@5008550a, org.springframework.security.web.header.HeaderWriterFilter@6beee63b, org.springframework.security.web.authentication.logout.LogoutFilter@31fd106c, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@1bfafc71, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@499fbeaa, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@c85480, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@60c89093, org.springframework.security.web.access.ExceptionTranslationFilter@5f4f6f89, org.springframework.security.web.access.intercept.AuthorizationFilter@4c24040a]
+May 01, 2023 7:10:57 PM org.springframework.security.config.annotation.web.builders.WebSecurity performBuild
+WARNING: You are asking Spring Security to ignore Mvc [pattern='/static/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+May 01, 2023 7:10:57 PM org.springframework.security.web.DefaultSecurityFilterChain <init>
+INFO: Will not secure Mvc [pattern='/static/**']
+WebConfig - viewResolver()
+May 01, 2023 7:10:57 PM org.springframework.web.context.ContextLoader initWebApplicationContext
+INFO: Root WebApplicationContext initialized in 2116 ms
+[...]
+01-May-2023 19:11:25.032 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+01-May-2023 19:11:25.053 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in [6720] milliseconds
 http://localhost:8080/Spring-security-training
 /* Step 2: Unknown user tries accessing "/home" page but closes the login prompt. They are redirected to 401 error page. Nothing is logged. */
 /* Step 3: User tries accessing "/static/health.html" page. No credentials are required. The page appears and nothing is logged. */
